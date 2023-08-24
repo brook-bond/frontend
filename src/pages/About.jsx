@@ -1,9 +1,10 @@
 import React from 'react';
-
+import { useAuth } from '../contexts/AuthContext';
 export default function About() {
+	const {user} = useAuth();
 	return (
 		<>
-			<div className="text-6xl font-bold text-slate-600">About Us</div>
+			<div className="text-6xl font-bold text-slate-600">About {user.name}</div>
 			<hr className="bg-slate-400 h-1 w-full my-4" />
 			<p>
 				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam
