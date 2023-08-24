@@ -5,8 +5,11 @@ export default function Profile() {
   const { user } = useAuth();
   return (
     <>
+	<div className="flex justify-center items-center bg-red-500">
+	<img src={`http://127.0.0.1:8000/storage/${user.image}`} alt="" width={100} height={100} />
+
       <div className="text-6xl font-bold text-slate-600">{user.name} Profile</div>
-      <img src={`http://127.0.0.1:8000/storage/${user.image}`} alt="" width={100} height={100} />
+	  </div>
 
       <hr className="bg-slate-400 h-1 w-full my-4" />
       <div className="block p-10 bg-white border border-gray-200 shadow-xl rounded-lg shadowdark:border-gray-700">
