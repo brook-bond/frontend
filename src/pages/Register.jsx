@@ -40,6 +40,7 @@ export default function Register() {
           setEmailError("");
         }
         if (error.response.data.errors.image) {
+          console.log(error.response.data.errors.image);
             setImageError(error.response.data.errors.image[0]);
           } else {
             setImageError("");
