@@ -5,7 +5,7 @@ export default function Profile() {
   const { user } = useAuth();
   return (
     <>
-	<div className="flex justify-center items-center bg-red-500">
+	<div className="flex justify-center items-center">
 	<img src={`http://127.0.0.1:8000/storage/${user.image}`} alt="" width={100} height={100} />
 
       <div className="text-6xl font-bold text-slate-600">{user.name} Profile</div>
