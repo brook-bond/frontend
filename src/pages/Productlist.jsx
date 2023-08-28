@@ -5,6 +5,9 @@ import axios from "../axios";
 
 function Productlist() {
   const [product, setProduct] = useState([]);
+
+  const [search, setSearch] = useState('');
+
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5;
   const lastIndex = currentPage * recordsPerPage;
@@ -63,6 +66,23 @@ function Productlist() {
           <div className="">
             <h5 className="mb-4">Product List</h5>
             <p className=""> </p>
+            <form>
+              <div class="mb-6">
+                <label
+                  for="search"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Serch product by title
+                </label>
+                <input
+                  type="text"
+                  id="search"
+                  onChange={(e) => setSearch(e.target.value)}
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/1 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="search by title"
+                />
+              </div>
+            </form>
             <table className="table-auto border-collapse border border-slate-500 hover:border-collapse ">
               <thead>
                 <tr>
@@ -78,10 +98,16 @@ function Productlist() {
                 </tr>
               </thead>
               <tbody>
-                {records.map((pdata, index) => (
+                {records.filter((item) => {
+                    return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search)
+                }).map((pdata, index) => (
                   <tr key={index}>
-                    <td className="border border-slate-500 p-2">{index + 1} </td>
-                    <td className="border border-slate-500 p-2">{pdata.name} </td>
+                    <td className="border border-slate-500 p-2">
+                      {index + 1}{" "}
+                    </td>
+                    <td className="border border-slate-500 p-2">
+                      {pdata.name}{" "}
+                    </td>
                     <td className="border border-slate-500 p-2">
                       {pdata.description}{" "}
                     </td>
