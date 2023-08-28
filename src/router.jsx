@@ -8,6 +8,7 @@ import GuestLayout from './components/GuestLayout';
 import Addproduct from './pages/Addproduct';
 import Productlist from './pages/Productlist';
 import EditProduct from './pages/EditProduct';
+import ViewProduct from './pages/ViewProduct';
 
 const router = createBrowserRouter([
 	{
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
 			{
 				path: '/editproduct/:id/edit',
 				element: <EditProduct />,
+			},
+			{
+				path: '/view/:id/view',
+				element: <ViewProduct />,
 			}
 		],
 	},

@@ -6,7 +6,7 @@ import axios from "../axios";
 function Productlist() {
   const [product, setProduct] = useState([]);
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5;
@@ -67,10 +67,10 @@ function Productlist() {
             <h5 className="mb-4">Product List</h5>
             <p className=""> </p>
             <form>
-              <div class="mb-6">
+              <div className="mb-6">
                 <label
-                  for="search"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  htmlFor="search"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Serch product by title
                 </label>
@@ -78,7 +78,7 @@ function Productlist() {
                   type="text"
                   id="search"
                   onChange={(e) => setSearch(e.target.value)}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/1 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/1 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="search by title"
                 />
               </div>
@@ -98,51 +98,61 @@ function Productlist() {
                 </tr>
               </thead>
               <tbody>
-                {records.filter((item) => {
-                    return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search)
-                }).map((pdata, index) => (
-                  <tr key={index}>
-                    <td className="border border-slate-500 p-2">
-                      {index + 1}{" "}
-                    </td>
-                    <td className="border border-slate-500 p-2">
-                      {pdata.name}{" "}
-                    </td>
-                    <td className="border border-slate-500 p-2">
-                      {pdata.description}{" "}
-                    </td>
-                    <td className="border border-slate-500 p-2">
-                      <img
-                        src={`http://127.0.0.1:8000/storage/${pdata.image}`}
-                        alt=""
-                        width={40}
-                        height={40}
-                      />
-                    </td>
-                    <td className="border border-slate-500 p-2">
-                      <Link
-                        to={`/editproduct/${pdata.id}/edit`}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 ml-2 rounded"
-                      >
-                        Edit
-                      </Link>
-                      <button
-                        onClick={() => deleteProduct(pdata.id)}
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {records
+                  .filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.name.toLowerCase().includes(search);
+                  })
+                  .map((pdata, index) => (
+                    <tr key={index}>
+                      <td className="border border-slate-500 p-2">
+                        {index + 1}{" "}
+                      </td>
+                      <td className="border border-slate-500 p-2">
+                        {pdata.name}{" "}
+                      </td>
+                      <td className="border border-slate-500 p-2">
+                        {pdata.description}{" "}
+                      </td>
+                      <td className="border border-slate-500 p-2">
+                        <img
+                          src={`http://127.0.0.1:8000/storage/${pdata.image}`}
+                          alt=""
+                          width={40}
+                          height={40}
+                        />
+                      </td>
+                      <td className="border border-slate-500 p-2">
+                        <Link
+                          to={`/view/${pdata.id}/view`}
+                          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-2 ml-2 rounded"
+                        >
+                          View
+                        </Link>
+                        <Link
+                          to={`/editproduct/${pdata.id}/edit`}
+                          className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-2 px-4 mr-2 ml-2 rounded"
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          onClick={() => deleteProduct(pdata.id)}
+                          className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 mt-2 w-full rounded"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
             <nav aria-label="Page navigation example">
-              <ul class="inline-flex -space-x-px text-base h-10 mt-5">
+              <ul className="inline-flex -space-x-px text-base h-10 mt-5">
                 <li>
                   <a
                     href="#"
-                    class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     onClick={prePage}
                   >
                     Previous
@@ -154,7 +164,7 @@ function Productlist() {
                       href="#"
                       onClick={() => changeCPage(n)}
                       aria-current={`${currentPage === n ? "page" : ""}`}
-                      class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                       {n}
                     </a>
@@ -164,7 +174,7 @@ function Productlist() {
                   <a
                     href="#"
                     onClick={nextPage}
-                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     Next
                   </a>
