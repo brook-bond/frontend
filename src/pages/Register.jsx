@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../axios";
 import { useAuth } from "../contexts/AuthContext";
@@ -9,10 +9,13 @@ export default function Register() {
   const [emailError, setEmailError] = React.useState("");
   const [imageError, setImageError] = React.useState("");
   const [passwordError, setPasswordError] = React.useState("");
-
+  const [isShown, setIsSHown] = useState(false);
+  const togglePassword = () => {
+    setIsSHown((isShown) => !isShown);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email,image, password, cpassword } = e.target.elements;
+    const { name, email, image, password, cpassword } = e.target.elements;
     const body = {
       name: name.value,
       email: email.value,
@@ -41,10 +44,10 @@ export default function Register() {
         }
         if (error.response.data.errors.image) {
           console.log(error.response.data.errors.image);
-            setImageError(error.response.data.errors.image[0]);
-          } else {
-            setImageError("");
-          }
+          setImageError(error.response.data.errors.image[0]);
+        } else {
+          setImageError("");
+        }
         if (error.response.data.errors.password) {
           setPasswordError(error.response.data.errors.password[0]);
         } else {
@@ -79,7 +82,7 @@ export default function Register() {
               method="post"
               onSubmit={handleSubmit}
             >
-                <div>
+              <div>
                 <label
                   htmlFor="image"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -141,7 +144,7 @@ export default function Register() {
                   Password
                 </label>
                 <input
-                  type="password"
+                  type={isShown ? "text" : "password"}
                   name="password"
                   id="password"
                   placeholder="********"
@@ -159,7 +162,7 @@ export default function Register() {
                   Confirm password
                 </label>
                 <input
-                  type="password"
+                  type={isShown ? "text" : "password"}
                   name="cpassword"
                   id="cpassword"
                   placeholder="********"
@@ -182,6 +185,20 @@ export default function Register() {
                   Login here
                 </Link>
               </p>
+              <div className="checkbox-container">
+                <label
+                  htmlFor="checkbox"
+                  className="text-sm font-light text-gray-500 dark:text-gray-400 mr-2"
+                >
+                  Show password?
+                </label>
+                <input
+                  id="checkbox"
+                  type="checkbox"
+                  checked={isShown}
+                  onChange={togglePassword}
+                />
+              </div>
             </form>
           </div>
         </div>

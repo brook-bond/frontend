@@ -35,19 +35,19 @@ function Productlist() {
 
     return (
         <React.Fragment>
-            <div className="container container_overflow">
-                <div className="row">
-                    <div className="col-12">
+            <div className="container ">
+                <div >
+                    <div className="">
                         <h5 className="mb-4">Product List</h5>
-                        <p className="text-danger"> </p>
+                        <p className=""> </p>
                         <table className="table-auto border-collapse border border-slate-500 hover:border-collapse ">
                             <thead>
                                 <tr>
-                                    <th className="border border-slate-500" scope="col">Sr.No</th>
-                                    <th className="border border-slate-500" scope="col">Product Title</th>
-                                    <th className="border border-slate-500" scope="col">Product Description</th>
-                                    <th className="border border-slate-500" scope="col">Product Image</th>
-                                    <th className="border border-slate-500" scope="col" width="200">
+                                    <th className="border border-slate-500" >Sr.No</th>
+                                    <th className="border border-slate-500" >Product Title</th>
+                                    <th className="border border-slate-500" >Product Description</th>
+                                    <th className="border border-slate-500" >Product Image</th>
+                                    <th className="border border-slate-500"  width="200">
                                         Action
                                     </th>
                                 </tr>
@@ -69,7 +69,7 @@ function Productlist() {
                                         <td className="border border-slate-500">
                                             <Link
                                                 to={`/editproduct/${pdata.id}/edit`}
-                                                className="btn btn-success mx-2"
+                                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 ml-2 rounded"
                                             >
                                                 Edit
                                             </Link>
@@ -77,7 +77,7 @@ function Productlist() {
                                                 onClick={() =>
                                                     deleteProduct(pdata.id)
                                                 }
-                                                className="btn btn-danger"
+                                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded"
                                             >
                                                 Delete
                                             </button>
