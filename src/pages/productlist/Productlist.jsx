@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
-import axios from "../axios";
+import axios from "../../axios";
+import { useAuth } from "../../contexts/AuthContext";
+import styles from './Productlist.module.css';
 
 function Productlist() {
+  const { user } = useAuth();
   const [product, setProduct] = useState([]);
-
   const [search, setSearch] = useState("");
-
+  const filteredProducts = product.filter((item) => {
+    return item.user_id === user.id;
+  });
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5;
   const lastIndex = currentPage * recordsPerPage;
   const firtsIndex = lastIndex - recordsPerPage;
-  const records = product.slice(firtsIndex, lastIndex);
-  const npage = Math.ceil(product.length / recordsPerPage);
+  const records = filteredProducts.slice(firtsIndex, lastIndex);
+  const npage = Math.ceil(filteredProducts.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
 
   useEffect(() => {
@@ -23,7 +27,6 @@ function Productlist() {
           return res.json();
         })
         .then((response) => {
-          console.log(response.products);
           setProduct(response.products);
         })
         .catch((error) => {
@@ -87,6 +90,7 @@ function Productlist() {
               <thead>
                 <tr>
                   <th className="border border-slate-500 p-2">Sr.No</th>
+
                   <th className="border border-slate-500 p-2">Product Title</th>
                   <th className="border border-slate-500 p-2">
                     Product Description
@@ -109,6 +113,7 @@ function Productlist() {
                       <td className="border border-slate-500 p-2">
                         {index + 1}{" "}
                       </td>
+
                       <td className="border border-slate-500 p-2">
                         {pdata.name}{" "}
                       </td>

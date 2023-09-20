@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "../axios";
+import axios from "../../axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import styles from "./ViewProduct.module.css";
 
 const ViewProduct = () => {
+  const { user } = useAuth();
   const { id } = useParams();
-  // console.log(id);
   const [products, setProduct] = useState([]);
   const navigate = useNavigate();
 
@@ -15,7 +17,6 @@ const ViewProduct = () => {
   const fetchProduct = async () => {
     try {
       const result = await axios.get("/products/" + id);
-      console.log(result.data.product.description);
       setProduct(result.data.product);
     } catch (err) {
       console.log("Something Wrong");
@@ -46,12 +47,14 @@ const ViewProduct = () => {
                   <td>{products.id}</td>
                   <td>{products.name}</td>
                   <td>
-                    <img
-                      src={`http://127.0.0.1:8000/storage/${products.image}`}
-                      alt=""
-                      height={300}
-                      width={300}
-                    />
+                    {user.id && (
+                      <img
+                        src={`http://127.0.0.1:8000/storage/${products.image}`}
+                        alt=""
+                        height={300}
+                        width={300}
+                      />
+                    )}
                   </td>
                   <td>{products.description}</td>
                 </tr>

@@ -1,9 +1,11 @@
 import React from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
+import styles from './about.module.css';
 export default function About() {
 	const {user} = useAuth();
 	return (
 		<>
+		<div className={styles.test}>dddd</div>
 			<div className="text-6xl font-bold text-slate-600">About {user.name}</div>
 			<hr className="bg-slate-400 h-1 w-full my-4" />
 			<p>

@@ -1,0 +1,166 @@
+.mainCointainer {
+    background-color: rgb(194, 177, 177);
+    height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+}
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    margin-top: 100px;
+
+}
+.logoLink{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.formWrapper{
+    width: 500px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    border-radius: 15px;
+    align-items: center;
+    padding: 20px 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+
+}
+.title {
+    color: #fff;
+    font-size: 37px;
+    text-shadow: 2px 2px 4px #000;
+}
+.form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+
+}
+.inputHolder{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+        position: relative;
+        display: inline-block;
+
+}
+.label{
+    color: #fff;
+    font-size: 1rem;
+    text-shadow: 2px 2px 4px #000;
+}
+.errorText{
+  color: #f00;
+  text-shadow:2px 2px 10px #fff;
+  width: 120px;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 15px;
+  left: 101%;
+  background-color: #000;
+  box-shadow: 3px 3px 10px #fff;
+ }
+ .errorText::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+  }
+.inp{
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background-color: rgb(194, 177, 177);
+    box-shadow: 2px 2px 8px #fff;
+    color: #fff;
+
+}
+.inp::placeholder{
+    color: #fff;
+    text-shadow: 2px 2px 4px #000;
+}
+.inp:focus {
+    outline: none !important;
+    border:1px solid #000;
+    box-shadow: 0 0 10px #fff;
+}
+.loginButton{
+    width: 100%;
+     background-color: rgb(194, 177, 177);
+    box-shadow: 2px 2px 8px #fff;
+    padding: 10px;
+     border-radius: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000;
+
+}
+.bottomText{
+  color: #fff;
+display: flex;
+ gap: 5px;
+ text-shadow: 2px 2px 4px #000;
+
+}
+.signUp{
+color: #000;
+text-shadow: 2px 2px 4px #fff;
+}
+.checkboxText{
+ color: #fff;
+ text-shadow: 2px 2px 4px #000;
+}
+.checkboxWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.backButton{
+    box-shadow: 2px 2px 8px #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+.backButton:hover {
+    background-color: #fff;
+}
+.backLink{
+    box-shadow: 2px 2px 8px #fff;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000;
+}
+.backLink:hover{
+    color: #000;
+    background-color: #fff;
+}
+.checkBox{
+width: 20px;
+ height: 20px;
+border: none;
+box-shadow: 1px 1px 5px #848181;
+outline: none;
+}

@@ -1,53 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import axios from "../axios";
-import { useNavigate } from "react-router-dom";
+import axios from "../../axios";
+import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import styles from "./EditProduct.module.css";
 
-function Addproduct() {
+function EditProduct() {
+  const { user } = useAuth();
   const navigate = useNavigate();
 
-  const [txtname, setName] = useState("");
-  const [txtdescription, setdescription] = useState("");
-  const [fileimage, setPhoto] = useState("");
+  const { id } = useParams();
+
   const [message, setMessage] = useState("");
 
+  const [inputs, setInputs] = useState([]);
+  const [fileimage, setPhoto] = useState("");
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
+
   const uploadProduct = async () => {
-    console.log(fileimage);
     const formData = new FormData();
-    formData.append("name", txtname);
-    formData.append("description", txtdescription);
+    formData.append("_method", "PUT");
+    formData.append("user_id", user.id);
+    formData.append("name", inputs.name);
+    formData.append("price", inputs.price);
+    formData.append("description", inputs.description);
     formData.append("image", fileimage);
-    const responce = await axios.post("/products", formData, {
+    const response = await axios.post("/productsupdate/" + id, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (responce) {
-      console.log(responce);
-      setMessage(responce.message); 
-      setTimeout(() => {
-        navigate("/productlist");
-      }, 2000);
-    }
+    setMessage(response.data.message);
+    setTimeout(() => {
+      navigate("/productlist");
+    }, 2000);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await uploadProduct();
   };
+
+  useEffect(() => {
+    getproduct();
+  }, []);
+
+  function getproduct() {
+    axios.get("/products/" + id).then(function (response) {
+      setInputs(response.data.product);
+    });
+  }
+
   return (
     <React.Fragment>
       <div className="container bg-red-100">
         <div>
-          <h5 className="m-4 ">Add Product </h5>
-          <p className="text-warning">{message}</p>
+          <h5 className="mb-4">Edit Product </h5>
+          <p className="text-success">
+            <b>{message}</b>
+          </p>
         </div>
+
         <form onSubmit={handleSubmit} className="w-full max-w-sm">
           <div className="md:flex md:items-center mb-6">
             <div className="md:w-1/3">
-              <label
-                className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                for="inline-full-name"
-              >
+              <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                 Product Title{" "}
               </label>
             </div>
@@ -55,33 +75,60 @@ function Addproduct() {
             <div className="md:w-2/3">
               <input
                 type="text"
+                value={inputs.name || ""}
                 className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                onChange={(e) => setName(e.target.value)}
+                name="name"
+                onChange={handleChange}
               />
             </div>
           </div>
           <div className="md:flex md:items-center mb-6">
             <div className="md:w-1/3">
               <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                Description{" "}
+                Product Price{" "}
               </label>
             </div>
 
             <div className="md:w-2/3">
               <input
                 type="text"
+                value={inputs.price || ""}
                 className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                onChange={(e) => setdescription(e.target.value)}
+                name="price"
+                onChange={handleChange}
               />
             </div>
           </div>
+
           <div className="md:flex md:items-center mb-6">
+            <div className="md:w-1/3">
+              <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                Description{" "}
+              </label>
+            </div>
+            <div className="md:w-2/3">
+              <input
+                type="text"
+                value={inputs.description || ""}
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                name="description"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className=" md:items-center mb-6">
             <div className="md:w-1/3">
               <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                 Product Image
               </label>
             </div>
-
+            <img
+              src={`http://127.0.0.1:8000/storage/${inputs.image}`}
+              alt=""
+              height={300}
+              width={300}
+            />
             <div className="md:w-2/3">
               <input
                 type="file"
@@ -108,4 +155,4 @@ function Addproduct() {
     </React.Fragment>
   );
 }
-export default Addproduct;
+export default EditProduct;
